@@ -1,7 +1,7 @@
 import { Text, View, FlatList } from 'react-native';
 
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useSafeAreaInsets,} from 'react-native-safe-area-context';
 
 import Header from '@/components/Header'
@@ -14,7 +14,7 @@ import { Todo, useBoundStore } from '@/storage/todo';
 function Home() {
   const insets = useSafeAreaInsets();
 
-  const navigator = useNavigation();
+  const router = useRouter();
 
   const { todos, checkTodo } = useBoundStore();
 
@@ -35,7 +35,7 @@ function Home() {
         style={{ paddingTop: insets.top + 20 }}
       >
         <Header.Root>
-          <Header.Icon onPress={navigator.goBack}>
+          <Header.Icon onPress={router.back}>
             <Feather name="chevron-left" size={30} color={colors.primary} />
           </Header.Icon>
 
@@ -72,7 +72,7 @@ function Home() {
       </View>
 
       <View className="mx-5 mt-5">
-        <Button onPress={() => navigator.navigate('create-todo')}>Adicionar</Button>
+        <Button onPress={() => router.navigate('/create-todo')}>Adicionar</Button>
       </View>
     </>
   )
